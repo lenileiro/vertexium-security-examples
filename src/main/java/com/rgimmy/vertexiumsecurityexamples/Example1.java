@@ -19,7 +19,7 @@ public class Example1 {
         Map<String, Object> config = new HashMap<>();
         InMemoryGraphConfiguration configuration = new InMemoryGraphConfiguration(config);
         InMemoryGraph inMemoryGraph = InMemoryGraph.create(configuration);
-        Authorizations authorizations = new InMemoryAuthorizations();
+        Authorizations authorizations = inMemoryGraph.createAuthorizations();
         Visibility visibility = Visibility.EMPTY;
 
         //create vertex

@@ -21,8 +21,8 @@ public class Example3 {
         InMemoryGraph inMemoryGraph = InMemoryGraph.create(configuration);
 
         String securityTag = "manager";
-        Authorizations noAuthorizations = new InMemoryAuthorizations();
-        Authorizations higherLevelAuthorizations = new InMemoryAuthorizations(securityTag);
+        Authorizations noAuthorizations = inMemoryGraph.createAuthorizations();
+        Authorizations higherLevelAuthorizations = inMemoryGraph.createAuthorizations(securityTag);
         Visibility visibility = Visibility.EMPTY;
         Visibility highLevelVisibility = new Visibility(securityTag);
 

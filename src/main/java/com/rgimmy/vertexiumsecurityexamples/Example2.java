@@ -21,8 +21,8 @@ public class Example2 {
         InMemoryGraph inMemoryGraph = InMemoryGraph.create(configuration);
 
         String securityTag = "manager";
-        Authorizations noAuthorizations = new InMemoryAuthorizations();
-        Authorizations higherLevelAuthorizations = new InMemoryAuthorizations(securityTag);
+        Authorizations noAuthorizations = inMemoryGraph.createAuthorizations();
+        Authorizations higherLevelAuthorizations = inMemoryGraph.createAuthorizations(securityTag);
         Visibility visibility = Visibility.EMPTY;
         Visibility highLevelVisibility = new Visibility(securityTag);
 
@@ -33,17 +33,18 @@ public class Example2 {
         vertex.setProperty("SSN", "123-45-6789", highLevelVisibility, higherLevelAuthorizations);
         inMemoryGraph.flush();
 
-        System.out.println("=====reading vertex as regular user======");
         //read vertex as no authorization user
+        System.out.println("=====reading vertex as regular user======");
         Vertex readVertex = inMemoryGraph.getVertex("PersonVertex", noAuthorizations);
         System.out.println("ID: " + readVertex.getId());
         System.out.println("FirstName: " + readVertex.getPropertyValue("FirstName"));
         System.out.println("LastName: " + readVertex.getPropertyValue("LastName"));
         System.out.println("SSN: " + readVertex.getPropertyValue("SSN")); // this will be null
 
-        System.out.println("=====reading vertex as elevated user======");
+
 
         //read vertex as elevated user
+        System.out.println("=====reading vertex as elevated user======");
         readVertex = inMemoryGraph.getVertex("PersonVertex", higherLevelAuthorizations);
         System.out.println("ID: " + readVertex.getId());
         System.out.println("FirstName: " + readVertex.getPropertyValue("FirstName"));
